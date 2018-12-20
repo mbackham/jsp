@@ -16,7 +16,7 @@
 		<div class="swiper-area">
 			<van-swipe :autoplay='1000'>
 				<van-swipe-item v-for='(item,index) in banner' :key='index'>
-					<img :v-lazy="item.image" >
+					<img v-lazy="item.image" width="100%" height='100%'>
 				</van-swipe-item>
 				
 			</van-swipe>
@@ -55,7 +55,7 @@
 				this.category = res.data.data.category
 				this.adbanner = res.data.data.advertesPicture.PICTURE_ADDRESS
 				this.banner = res.data.data.slides
-				console.log(res.data.data)
+				console.log(this.banner)
 			}).catch(err=>{
 				console.log(err)
 			})
