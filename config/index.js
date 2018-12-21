@@ -11,14 +11,8 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-        '/api':{
-        target: 'http://ccss.domch.cn/web-api', //需要代理的地址'http://116.62.118.104:8782/web-api'
-        changeOrigin: true, //是否跨域
-        secure: false,//是否是https协议
-        // pathRewrite: {
-        // '^/api': '/' //本身的接口地址没有 '/api' 这种通用前缀，所以要rewrite，如果本身有则去掉
-        // }
-        }
+        
+       
 },
 
     // Various Dev Server settings

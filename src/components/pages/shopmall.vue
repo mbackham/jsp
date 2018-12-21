@@ -31,10 +31,44 @@
 		<div class="">
 			<img v-lazy="adbanner" width='100%' alt="">
 		</div>
+		<div class="recommend-area">
+			<div class="recommend-title">
+				商品推荐
+			</div>
+			<div class="recommend-body">
+				<swiper :options='swiperOption'>
+					<swiper-slide v-for='(item,index) in recommongoods' :key="index">
+						<div class="recommend-item">
+							<img :src="item.image" width="80%" >
+							<div>{{item.goodsName}}</div>
+							<div>￥{{item.price}} (￥{{item.mallPrice}})</div>
+						</div>
+					</swiper-slide>
+				</swiper>
+			</div>
+		</div>
+		<div class="floor">
+			<div class="floor-normal">
+				<div class="floor_one">
+					<img :src="floor1_0.image" width="100%"/>
+				</div>
+				<div>
+					<div class="floor_two">
+						<img :src="floor1_1.image" width="100%"/>
+					</div>
+					<div >
+						<img :src="floor1_2.image" width="100%">
+					</div>
+				</div>
+			</div>
+			
+		</div>
 	</div>
 </template>
 <script>
 	import axios from 'axios'
+	import 'swiper/dist/css/swiper.css'
+	import {swiper,swiperSlide} from 'vue-awesome-swiper'
 	export default{
 		data(){
 			return{
@@ -42,8 +76,21 @@
 				location:require('../../assets/images/loca.png'),
 				banner:[],
                 category:[],
-                adbanner:''
+                adbanner:'',
+                recommongoods:[],
+                swiperOption:{
+                	loop:true,
+                	slidesPerView:3
+                },
+                floor1:[],
+                floor1_0:{},
+                floor1_1:{},
+                floor1_2:{}
+
 			}
+		},
+		components:{
+			swiper,swiperSlide
 		},
 		created(){
 			axios({
@@ -55,10 +102,19 @@
 				this.category = res.data.data.category
 				this.adbanner = res.data.data.advertesPicture.PICTURE_ADDRESS
 				this.banner = res.data.data.slides
-				console.log(this.banner)
+				this.recommongoods=res.data.data.recommend
+				this.floor1=res.data.data.floor1
+				this.floor1_0 = this.floor1[0]
+                this.floor1_1 = this.floor1[1]
+                this.floor1_2 = this.floor1[2]
+				console.log(res.data.data)
 			}).catch(err=>{
 				console.log(err)
 			})
+		},
+		components:{
+				
+			swiper,swiperSlide
 		}
 	}
 </script>
@@ -104,5 +160,45 @@
 		padding:.4rem;
 		font-size:12px;
 		text-align:center;
+	}
+	.recommend-area{
+		background:#fff;
+		margin-top:.3rem;
+
+	}
+	.recommend-title{
+		border-bottom:1px solid #eee;
+		font-size:14px;
+		padding:.2rem;
+		color:#e5017d;
+	}
+	.recommend-body{
+		border-bottom:1px solid #eee;
+
+	}
+	.recommend-item{
+		width:99%;
+		border-right:1px solid #eee;
+		font-size:12px;
+		text-align:center;
+
+	}
+	.floor-normal{
+		 display:flex;
+		 flex-direction:row;
+		 background:#fff;
+		 border-bottom:1px solid #ddd;
+
+	}
+	.floor-normal div {
+		width:10rem;
+		box-sizing:border-box;
+	}
+	.floor_one{
+		border-right:1px solid #ddd;
+
+	}
+	.floor_two{
+		border-bottom:1px solid #ddd;
 	}
 </style>
