@@ -94,5 +94,8 @@
   "bugs": {
     "url": "https://github.com/mbackham/jsp/issues"
   },
-  "homepage": "https://github.com/mbackham/jsp#readme"
+  "homepage": "https://github.com/mbackham/jsp#readme",
+  "keywords": [
+    "mabo19920219"
+  ]
 }
