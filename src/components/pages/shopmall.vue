@@ -47,12 +47,10 @@
 				</swiper>
 			</div>
 		</div>
-		<floor :floorData='floor1' :floorTitle='floorName.floor1'></floor>
-		<floor :floorData='floor2' :floorTitle='floorName.floor2'></floor>
-
-		<floor :floorData='floor3' :floorTitle='floorName.floor3'></floor>
-
-	</div>
+		<floor :floorData='floor1' :floorTitle='floorName.floor1'/>
+		<floor :floorData='floor2' :floorTitle='floorName.floor2'/>
+		<floor :floorData='floor3' :floorTitle='floorName.floor3'/>
+ 	</div>
 </template>
 <script>
 	import axios from 'axios'
@@ -61,6 +59,9 @@
 	import {toMoney} from '@/filter/moneyFilter.js'
 	import {swiper,swiperSlide} from 'vue-awesome-swiper'
 	export default{
+		components:{
+			swiper,swiperSlide,floor
+		},
 		data(){
 			return{
 				msg:'asd',
@@ -86,9 +87,9 @@
 				return toMoney(money)
 			}
 		},
-		components:{
-			swiper,swiperSlide,floor
-		},
+		
+		
+		
 		created(){
 			axios({
 				url:'https://www.easy-mock.com/mock/5c1afd665bedd73867442daf/jsp/index',
@@ -106,11 +107,16 @@
 
 				this.floorName=res.data.data.floorName
 				console.log(res.data.data)
+
+
+				this.floorName = res.data.data.floorName
 			}).catch(err=>{
 				console.log(err)
 			})
 		},
 	
+
+		
 	}
 </script>
 <style>
@@ -179,4 +185,6 @@
 
 	}
 	
+
+
 </style>
