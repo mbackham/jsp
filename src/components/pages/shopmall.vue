@@ -50,6 +50,20 @@
 		<floor :floorData='floor1' :floorTitle='floorName.floor1'/>
 		<floor :floorData='floor2' :floorTitle='floorName.floor2'/>
 		<floor :floorData='floor3' :floorTitle='floorName.floor3'/>
+		<div class="hot-area">
+		    <div class="hot-title">热卖商品</div>
+		    <div class="hot-goods">
+		     <van-List>
+		     	<van-row gutter='20'>
+		     		<van-col span='12' v-for='(item,index) in hotGoods' :key='index'>
+		     			<goods-info :goodsImage='item.image' :goodsName='item.name' :goodsPrice='item.price'>
+		     				
+		     			</goods-info>
+		     		</van-col>
+		     	</van-row>
+		     </van-List> <!--这里需要一个list组件-->
+    </div>
+</div>
  	</div>
 </template>
 <script>
@@ -58,9 +72,11 @@
 	import floor from '../floor/floor'
 	import {toMoney} from '@/filter/moneyFilter.js'
 	import {swiper,swiperSlide} from 'vue-awesome-swiper'
+	import goodsInfo from '../goods/hotgoods'
+	import url from '@/serviceAPI.config.js'
 	export default{
 		components:{
-			swiper,swiperSlide,floor
+			swiper,swiperSlide,floor,goodsInfo
 		},
 		data(){
 			return{
@@ -77,9 +93,8 @@
                 floor1:[],
                 floor2:[],
                 floor3:[],
-              
-                floorName:{}
-
+              	floorName:{},
+              	hotGoods:[]//热卖商品
 			}
 		},
 		filters:{
@@ -104,7 +119,7 @@
 				this.floor1=res.data.data.floor1
 				this.floor2=res.data.data.floor2
 				this.floor3=res.data.data.floor3
-
+				this.hotGoods=res.data.data.hotGoods
 				this.floorName=res.data.data.floorName
 				console.log(res.data.data)
 
@@ -185,6 +200,11 @@
 
 	}
 	
-
+.hot-area{
+      text-align: center;
+      font-size:14px;
+      height: 1.8rem;
+      line-height:1.8rem;
+  }
 
 </style>
