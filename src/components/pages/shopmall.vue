@@ -107,7 +107,7 @@
 		
 		created(){
 			axios({
-				url:url.getShopingMallInfo,
+				url:'https://www.easy-mock.com/mock/5c1afd665bedd73867442daf/jsp/index',
 				method:'get',
 			})
 			.then(res=>{
