@@ -5,8 +5,8 @@ import App from './App'
 import router from './router'
 // import VueAwesomeSwiper from 'vue-awesome-swiper'
 // import 'swiper/dist/css/swiper.css'
-import {Button,Row,Col,Swipe,SwipeItem,Lazyload,List} from 'vant'
-Vue.use(Button).use(Row).use(Col).use(List).use(Swipe).use(SwipeItem).use(Lazyload)
+import {Button,Row,Col,Swipe,SwipeItem,Lazyload,List,Field,NavBar} from 'vant'
+Vue.use(Button).use(Row).use(Col).use(List).use(Swipe).use(SwipeItem).use(Lazyload).use(NavBar).use(Field)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
