@@ -33,7 +33,7 @@
 <script>
 import axios from 'axios';
  import Vue from 'vue' 
-
+import {Toast} from 'vant'
 Vue.prototype.$http = axios;
 import url from '@/serviceApi.config.js'
 export default {
@@ -64,6 +64,14 @@ methods:{
      password:this.password
     }).then(res=>{
       console.log(res)
+      if(res.data.code==200){
+        Toast.success(res.data.message)
+      }else{
+        console.log(res.data.message )
+        Toast.fail('注册失败')
+      }
+    }).catch((err)=>{
+      console.log(err)
     })
   }
 }
