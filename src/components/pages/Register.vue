@@ -24,13 +24,18 @@
         required>
         </van-field>
         <div class="register-button">
-          <van-button type="primary" size='large'>马上注册</van-button>
+          <van-button @click="axiosRegisterUser" type="primary" size='large'>马上注册</van-button>
         </div>
       </div>
       </div>
 </template>
 
 <script>
+import axios from 'axios';
+ import Vue from 'vue' 
+
+Vue.prototype.$http = axios;
+import url from '@/serviceApi.config.js'
 export default {
 data(){
   return{
@@ -41,6 +46,25 @@ data(){
 methods:{
   goBack(){
     this.$router.go(-1)
+  },
+  axiosRegisterUser(){
+    // axios({
+    //   url:url.registerUser,
+    //   method:'post',
+    //   data:{
+    //     username:this.username,
+    // password:this.password
+    //   }
+
+    // }).then(response=>{
+    //   console.log(response)
+    // })
+    axios.post('http://localhost:3000/user/register',{
+       username:this.username,
+     password:this.password
+    }).then(res=>{
+      console.log(res)
+    })
   }
 }
 }
