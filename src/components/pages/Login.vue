@@ -1,7 +1,7 @@
 <template>
   <div>
       <van-nav-bar
-      title="用户注册"
+      title="用户登陆"
       left-text='返回'
       left-arrow
       @click-left='goBack '>
@@ -26,7 +26,7 @@
         required>
         </van-field>
         <div class="register-button">
-          <van-button @click="regosterAction()" type="primary" size='large' :loading="openLoading">马上注册</van-button>
+          <van-button @click="LoginAction()" type="primary" size='large' :loading="openLoading">登陆</van-button>
         </div>
       </div>
       </div>
@@ -53,29 +53,18 @@ methods:{
   goBack(){
     this.$router.go(-1)
   },
-  regosterAction(){
+  loginAction(){
   //  if(this.checkForm()){
-  //    this.axiosRegisterUser()
+  //    this.axiosLoginUser()
   //  }else{
      
   //  }
-  this.checkForm()&& this.axiosRegisterUser()
+  this.checkForm()&& this.axiosLoginUser()
   },
-  axiosRegisterUser(){
+  axiosLoginUser(){
           this.openLoading=true,
 
-    // axios({
-    //   url:url.registerUser,
-    //   method:'post',
-    //   data:{
-    //     username:this.username,
-    // password:this.password
-    //   }
-
-    // }).then(response=>{
-    //   console.log(response)
-    // })
-    axios.post('http://localhost:3000/user/register',{
+    axios.post('http://localhost:3000/user/login',{
        username:this.username,
      password:this.password
     }).then(res=>{
