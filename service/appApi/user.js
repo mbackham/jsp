@@ -22,15 +22,15 @@ router.post('/register',async(ctx)=>{
    })
 
 })
-router.post('/login',async(stx)=>{
+router.post('/login',async(ctx)=>{
     let loginUser = ctx.request.body
     console.log(loginUser)
-    let username = loginUser.username
+    let userName = loginUser.userName
     let password = loginUser.password
     const User = mongoose.model('User')
     await User.findOne({
-        username:username
-    }).exec().then((result)=>{
+        userName:userName
+    }).exec().then(async(result)=>{
         if(result){
             let newUser = new User()
             await newUser.comparePassword(password,result.password)

@@ -38,6 +38,7 @@ import axios from 'axios';
 import {Toast} from 'vant'
 Vue.prototype.$http = axios;
 import url from '@/serviceApi.config.js'
+import { resolve } from 'url';
 export default {
 data(){
   return{
@@ -48,6 +49,12 @@ data(){
     passwordErrorMsg:''//密码错的时候
 
  }
+},
+created(){
+    if(localStorage.userInfo){
+      Toast.success('你已经登陆了')
+      this.$router.push('/')
+    }
 },
 methods:{
   goBack(){
@@ -68,21 +75,30 @@ methods:{
        username:this.username,
      password:this.password
     }).then(res=>{
-      console.log(res)
-      if(res.data.code==200){
-
-        Toast.success(res.data.message)
-        this.$router.push('/')
+      
+      if(res.data.code==200 && res.data.message){
+          new Promise((res,rej)=>{
+                  localStorage.userInfo = {userName:this.message}
+                  setTimeout(() => {resolve()}, 500)
+                }).then(()=>{
+                  Toast.success('登陆成功')
+                  this.$router.push('/')
+                }).catch(err=>{
+                  Toast.fail('登陆状态保存失败')
+                })
+        //         console.log(res)
+        // Toast.success("登陆成功")
+        // this.$router.push('/')
       }else{
         console.log(res.data.message )
                 this.openLoading=false
 
-                Toast.fail('注册失败')
+                Toast.fail('登陆失败')
 
       }
     }).catch((err)=>{
       console.log(err)
-              Toast.fail('注册失败')
+              Toast.fail('登陆失败')
                       this.openLoading=false
 
 

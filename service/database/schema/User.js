@@ -22,10 +22,10 @@ bcrypt.genSalt(SALT_WORK_FACTOR,(err,salt)=>{
 })
 })
 userSchema.methods={
-    comparePassword:(_password,password)=>{
+    comparePassword:(_password,password)=>{//比对密码
         return new Promise((resolve,reject)=>{
             bcrypt.compare(_password,password,(err,isMatch)=>{
-                if(!err)resolve(isMatch)
+                if(!err) resolve(isMatch)
                 else reject(err)   
             })
         })
